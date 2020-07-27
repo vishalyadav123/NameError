@@ -1,0 +1,436 @@
+-------------------------------------CREATE DATABASE---------------------------------------------------.
+create database books;
+-------------------------------------USE DATABASE----------------------------------------------------------------------------------------.
+use books;
+---------------------------------------------------CREATE TABLE--------------------------------------------------------------------------------------.
+create table book(BID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,BNAME VARCHAR(40),AUTHOR VARCHAR(40),PRICE INT,PUB DATE);
+
+----------------------------------------------------INSET VALUES IN TABLE-----------------------------------------------------------------------------------.
+insert into book(BNAME,AUTHOR,PRICE,PUB)  values("The Alchemist","paul Coelho",250,"2005-10-17");
+insert into book(BNAME,AUTHOR,PRICE,PUB)  values("Harry Potter","J.K Rowling",300,"2014-09-01");
+insert into book(BNAME,AUTHOR,PRICE,PUB)  values("Wings of Fire","A.P.J Abdul kalam",316,"1991-01-01");
+insert into book(BNAME,AUTHOR,PRICE,PUB)  values("My Gita","Devdutt Pattanaik",231,"2015-11-11");
+insert into book(BNAME,AUTHOR,PRICE,PUB)  values("India After Gandhi","Ramachandra Guha",599,"217-07-19");
+insert into book(BNAME,AUTHOR,PRICE,PUB)  values("Gone Girl","Gillian Flynn",295,"212-11-08");
+insert into book(BNAME,AUTHOR,PRICE,PUB)  values("Tresure Island","Robert Louis",149,"2013-01-01");
+-----------------------------------SELECT DATA FROM DATABASE----------------------------------------------------------------------.
+ select * from book;
+ +-----+--------------------+------------------------+-------+------------+
+| BID | BNAME              | AUTHOR                 | PRICE | PUB        |
++-----+--------------------+------------------------+-------+------------+
+|   1 | The Alchemist      | Paulo Coelho           |   250 | 2005-10-17 |
+|   2 | Harry Potter       |  J.K. Rowling          |   300 | 2014-09-01 |
+|   3 | Wings of Fire      |  A. P. J. Abdul Kalam  |   316 | 1999-01-01 |
+|   4 | My Gita            | Devdutt Pattanaik      |   231 | 2015-11-11 |
+|   5 | India After Gandhi | Ramachandra Guha       |   599 | 2017-07-19 |
+|   6 | Gone Girl          | Gillian Flynn          |   295 | 2012-11-08 |
+|   7 | Treasure Island    | Robert Louis           |   149 | 2013-01-01 |
++-----+--------------------+------------------------+-------+------------+
+
+---------------------------------------------------------------------------OPERATORS-------------------------------------------------------------------------------------------
+--------------------------------------------------------COMPARISON OPERATOR-------------------------------------------------------------------.
+mysql> select * from book where BNAME = "My Gita";
++-----+---------+-------------------+-------+------------+
+| BID | BNAME   | AUTHOR            | PRICE | PUB        |
++-----+---------+-------------------+-------+------------+
+|   4 | My Gita | Devdutt Pattanaik |   231 | 2015-11-11 |
++-----+---------+-------------------+-------+------------+
+1 row in set (0.12 sec)
+
+mysql> select * from book where price >=300;
++-----+--------------------+------------------------+-------+------------+
+| BID | BNAME              | AUTHOR                 | PRICE | PUB        |
++-----+--------------------+------------------------+-------+------------+
+|   2 | Harry Potter       |  J.K. Rowling          |   300 | 2014-09-01 |
+|   3 | Wings of Fire      |  A. P. J. Abdul Kalam  |   316 | 1999-01-01 |
+|   5 | India After Gandhi | Ramachandra Guha       |   599 | 2017-07-19 |
++-----+--------------------+------------------------+-------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from book where price<=300;
++-----+-----------------+-------------------+-------+------------+
+| BID | BNAME           | AUTHOR            | PRICE | PUB        |
++-----+-----------------+-------------------+-------+------------+
+|   1 | The Alchemist   | Paulo Coelho      |   250 | 2005-10-17 |
+|   2 | Harry Potter    |  J.K. Rowling     |   300 | 2014-09-01 |
+|   4 | My Gita         | Devdutt Pattanaik |   231 | 2015-11-11 |
+|   6 | Gone Girl       | Gillian Flynn     |   295 | 2012-11-08 |
+|   7 | Treasure Island | Robert Louis      |   149 | 2013-01-01 |
++-----+-----------------+-------------------+-------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from book where pub != "2014-09-01";
++-----+--------------------+------------------------+-------+------------+
+| BID | BNAME              | AUTHOR                 | PRICE | PUB        |
++-----+--------------------+------------------------+-------+------------+
+|   1 | The Alchemist      | Paulo Coelho           |   250 | 2005-10-17 |
+|   3 | Wings of Fire      |  A. P. J. Abdul Kalam  |   316 | 1999-01-01 |
+|   4 | My Gita            | Devdutt Pattanaik      |   231 | 2015-11-11 |
+|   5 | India After Gandhi | Ramachandra Guha       |   599 | 2017-07-19 |
+|   6 | Gone Girl          | Gillian Flynn          |   295 | 2012-11-08 |
+|   7 | Treasure Island    | Robert Louis           |   149 | 2013-01-01 |
++-----+--------------------+------------------------+-------+------------+
+6 rows in set (0.10 sec)
+
+------------------------------------------------------LOGICAL OPERATOR------------------------------------------------------------------------.
+mysql> select * from book where price = 250 and BNAME = "The Alchemist";
++-----+---------------+--------------+-------+------------+
+| BID | BNAME         | AUTHOR       | PRICE | PUB        |
++-----+---------------+--------------+-------+------------+
+|   1 | The Alchemist | Paulo Coelho |   250 | 2005-10-17 |
++-----+---------------+--------------+-------+------------+
+1 row in set (0.00 sec)
+
+mysql> select * from book where price = 250 or price = 231;
++-----+---------------+-------------------+-------+------------+
+| BID | BNAME         | AUTHOR            | PRICE | PUB        |
++-----+---------------+-------------------+-------+------------+
+|   1 | The Alchemist | Paulo Coelho      |   250 | 2005-10-17 |
+|   4 | My Gita       | Devdutt Pattanaik |   231 | 2015-11-11 |
++-----+---------------+-------------------+-------+------------+
+2 rows in set (0.00 sec)
+
+
+mysql> select * from book where BNAME in("The Alchemist","My Gita","Gone Girl");
++-----+---------------+-------------------+-------+------------+
+| BID | BNAME         | AUTHOR            | PRICE | PUB        |
++-----+---------------+-------------------+-------+------------+
+|   1 | The Alchemist | Paulo Coelho      |   250 | 2005-10-17 |
+|   4 | My Gita       | Devdutt Pattanaik |   231 | 2015-11-11 |
+|   6 | Gone Girl     | Gillian Flynn     |   295 | 2012-11-08 |
++-----+---------------+-------------------+-------+------------+
+
+mysql> select * from book where price between 300 and 500;
++-----+---------------+------------------------+-------+------------+
+| BID | BNAME         | AUTHOR                 | PRICE | PUB        |
++-----+---------------+------------------------+-------+------------+
+|   2 | Harry Potter  |  J.K. Rowling          |   300 | 2014-09-01 |
+|   3 | Wings of Fire |  A. P. J. Abdul Kalam  |   316 | 1999-01-01 |
++-----+---------------+------------------------+-------+------------+
+2 rows in set (0.04 sec)
+
+mysql> select * from book where author like "%A";
++-----+--------------------+------------------+-------+------------+
+| BID | BNAME              | AUTHOR           | PRICE | PUB        |
++-----+--------------------+------------------+-------+------------+
+|   5 | India After Gandhi | Ramachandra Guha |   599 | 2017-07-19 |
++-----+--------------------+------------------+-------+------------+
+
+mysql> select * from book where author like "p%";
++-----+---------------+--------------+-------+------------+
+| BID | BNAME         | AUTHOR       | PRICE | PUB        |
++-----+---------------+--------------+-------+------------+
+|   1 | The Alchemist | Paulo Coelho |   250 | 2005-10-17 |
++-----+---------------+--------------+-------+------------+
+
+mysql> select * from book where BNAME like "_i%";
++-----+---------------+------------------------+-------+------------+
+| BID | BNAME         | AUTHOR                 | PRICE | PUB        |
++-----+---------------+------------------------+-------+------------+
+|   3 | Wings of Fire |  A. P. J. Abdul Kalam  |   316 | 1999-01-01 |
++-----+---------------+------------------------+-------+------------+
+1 row in set (0.00 sec)
+
+mysql> select * from book where Author like "p%o";
++-----+---------------+--------------+-------+------------+
+| BID | BNAME         | AUTHOR       | PRICE | PUB        |
++-----+---------------+--------------+-------+------------+
+|   1 | The Alchemist | Paulo Coelho |   250 | 2005-10-17 |
++-----+---------------+--------------+-------+------------+
+1 row in set (0.00 sec)
+
+mysql> select * from book where PUB is not null;
++-----+--------------------+------------------------+-------+------------+
+| BID | BNAME              | AUTHOR                 | PRICE | PUB        |
++-----+--------------------+------------------------+-------+------------+
+|   1 | The Alchemist      | Paulo Coelho           |   250 | 2005-10-17 |
+|   2 | Harry Potter       |  J.K. Rowling          |   300 | 2014-09-01 |
+|   3 | Wings of Fire      |  A. P. J. Abdul Kalam  |   316 | 1999-01-01 |
+|   4 | My Gita            | Devdutt Pattanaik      |   231 | 2015-11-11 |
+|   5 | India After Gandhi | Ramachandra Guha       |   599 | 2017-07-19 |
+|   6 | Gone Girl          | Gillian Flynn          |   295 | 2012-11-08 |
+|   7 | Treasure Island    | Robert Louis           |   149 | 2013-01-01 |
++-----+--------------------+------------------------+-------+------------+
+7 rows in set (0.02 sec)
+
+mysql> delete from book where price like "2%";
+Query OK, 3 rows affected (0.92 sec)
+
+mysql> select * from book;
++-----+--------------------+------------------------+-------+------------+
+| BID | BNAME              | AUTHOR                 | PRICE | PUB        |
++-----+--------------------+------------------------+-------+------------+
+|   2 | Harry Potter       |  J.K. Rowling          |   300 | 2014-09-01 |
+|   3 | Wings of Fire      |  A. P. J. Abdul Kalam  |   316 | 1999-01-01 |
+|   5 | India After Gandhi | Ramachandra Guha       |   599 | 2017-07-19 |
+|   7 | Treasure Island    | Robert Louis           |   149 | 2013-01-01 |
++-----+--------------------+------------------------+-------+------------+
+------------------------------------------------------------------AGGREGATE FUNCTION-----------------------------------------------------------.
+mysql> select BNAME, SUM(PRICE) from book GROUP BY BNAME;
++--------------------+------------+
+| BNAME              | SUM(PRICE) |
++--------------------+------------+
+| The Alchemist      |        250 |
+| Harry Potter       |        300 |
+| Wings of Fire      |        316 |
+| My Gita            |        231 |
+| India After Gandhi |        599 |
+| Gone Girl          |        295 |
+| Tresure Island     |        149 |
++--------------------+------------+
+7 rows in set (0.12 sec)
+
+mysql> select price from book order by price;
++-------+
+| price |
++-------+
+|   149 |
+|   231 |
+|   250 |
+|   295 |
+|   300 |
+|   316 |
+|   599 |
++-------+
+
+mysql> select count(price) "price count", price from book group by price having price>300;
++-------------+-------+
+| price count | price |
++-------------+-------+
+|           1 |   316 |
+|           1 |   599 |
++-------------+-------+
+2 rows in set (0.04 sec)
+
+mysql> select avg(price) "AVERAGE" from book;
++----------+
+| AVERAGE  |
++----------+
+| 305.7143 |
++----------+
+
+mysql> select min(price) "MIN PRICE" from book;
++-----------+
+| MIN PRICE |
++-----------+
+|       149 |
++-----------+
+1 row in set (0.03 sec)
+
+mysql> select max(price) "MAX PRICE" from book;
++-----------+
+| MAX PRICE |
++-----------+
+|       599 |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> select sum(price) from book;
++------------+
+| sum(price) |
++------------+
+|       2140 |
++------------+
+1 row in set (0.00 sec)
+-------------------------------------------------------------------------PRIMARY KEY, FOREIGN KEY-----------------------------------------------------------------------.
+mysql> create table IBOOK(IBID int not null,QUANTITY INT,BID int,PRIMARY KEY(IBID), FOREIGN KEY(BID) REFERENCES BOOK(BID));
+Query OK, 0 rows affected (1.45 sec)
+
+mysql> DESC IBOOK;
++----------+------+------+-----+---------+-------+
+| Field    | Type | Null | Key | Default | Extra |
++----------+------+------+-----+---------+-------+
+| IBID     | int  | NO   | PRI | NULL    |       |
+| QUANTITY | int  | YES  |     | NULL    |       |
+| BID      | int  | YES  | MUL | NULL    |       |
++----------+------+------+-----+---------+-------+
+3 rows in set (0.02 sec)
+
+mysql> DROP TABLE IBOOK;
+Query OK, 0 rows affected (2.29 sec)
+
+mysql> CREATE TABLE IBOOK(IBID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,B_QUANTIY INT,BID INT NOT NULL,CONSTRAINT BOOK_BID_FK FOREIGN KEY(BID) REFERENCES BOOK(BID));
+Query OK, 0 rows affected (0.83 sec)
+
+mysql> DESC IBOOK;
++-----------+------+------+-----+---------+----------------+
+| Field     | Type | Null | Key | Default | Extra          |
++-----------+------+------+-----+---------+----------------+
+| IBID      | int  | NO   | PRI | NULL    | auto_increment |
+| B_QUANTIY | int  | YES  |     | NULL    |                |
+| BID       | int  | NO   | MUL | NULL    |                |
++-----------+------+------+-----+---------+----------------+
+3 rows in set (0.01 sec)
+
+mysql> ALTER TABLE IBOOK ADD CONSTRAINT FK_BOOK FOREIGN KEY(BID) REFERENCES BOOK(BID);
+Query OK, 0 rows affected (2.32 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC IBOOK;
++-----------+------+------+-----+---------+----------------+
+| Field     | Type | Null | Key | Default | Extra          |
++-----------+------+------+-----+---------+----------------+
+| IBID      | int  | NO   | PRI | NULL    | auto_increment |
+| B_QUANTIY | int  | YES  |     | NULL    |                |
+| BID       | int  | NO   | MUL | NULL    |                |
++-----------+------+------+-----+---------+----------------+
+3 rows in set (0.02 sec)
+
+mysql> ALTER TABLE IBOOK DROP CONSTRAINT FK_BOOK;
+Query OK, 0 rows affected (0.42 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select book.BID, book.BNAME, book.AUTHOR, book.PRICE, bk.QUANTITY, bk.RATING FROM BOOK INNER JOIN bk ON BOOK.BID = BK.BKID;
++-----+--------------------+-------------------+-------+----------+--------+
+| BID | BNAME              | AUTHOR            | PRICE | QUANTITY | RATING |
++-----+--------------------+-------------------+-------+----------+--------+
+|   1 | The Alchemist      | paul Coelho       |   250 |        5 |      4 |
+|   2 | Harry Potter       | J.K Rowling       |   300 |        9 |      5 |
+|   3 | Wings of Fire      | A.P.J Abdul kalam |   316 |       10 |      5 |
+|   4 | My Gita            | Devdutt Pattanaik |   231 |        7 |      5 |
+|   5 | India After Gandhi | Ramachandra Guha  |   599 |       11 |      4 |
+|   6 | Gone Girl          | Gillian Flynn     |   295 |       12 |      4 |
+|   7 | Tresure Island     | Robert Louis      |   149 |       12 |      5 |
++-----+--------------------+-------------------+-------+----------+--------+
+7 rows in set (0.00 sec)
+
+
+mysql> select book.BNAME, book.PRICE, bk.QUANTITY, bk.RATING from BK LEFT JOIN BOOK ON BK.BKID = BOOK.BID ORDER BY BK.BNAME;
++--------------------+-------+----------+--------+
+| BNAME              | PRICE | QUANTITY | RATING |
++--------------------+-------+----------+--------+
+| Gone Girl          |   295 |       12 |      4 |
+| Harry Potter       |   300 |        9 |      5 |
+| India After Gandhi |   599 |       11 |      4 |
+| My Gita            |   231 |        7 |      5 |
+| The Alchemist      |   250 |        5 |      4 |
+| Tresure Island     |   149 |       12 |      5 |
+| Wings of Fire      |   316 |       10 |      5 |
++--------------------+-------+----------+--------+
+7 rows in set (0.13 sec)
+
+mysql> select book.BID, book.BNAME, book.AUTHOR, book.PRICE, bk.QUANTITY, bk.RATING FROM BOOK INNER JOIN bk ON BOOK.BID = BK.BKID;
++-----+--------------------+-------------------+-------+----------+--------+
+| BID | BNAME              | AUTHOR            | PRICE | QUANTITY | RATING |
++-----+--------------------+-------------------+-------+----------+--------+
+|   1 | The Alchemist      | paul Coelho       |   250 |        5 |      4 |
+|   2 | Harry Potter       | J.K Rowling       |   300 |        9 |      5 |
+|   3 | Wings of Fire      | A.P.J Abdul kalam |   316 |       10 |      5 |
+|   4 | My Gita            | Devdutt Pattanaik |   231 |        7 |      5 |
+|   5 | India After Gandhi | Ramachandra Guha  |   599 |       11 |      4 |
+|   6 | Gone Girl          | Gillian Flynn     |   295 |       12 |      4 |
+|   7 | Tresure Island     | Robert Louis      |   149 |       12 |      5 |
++-----+--------------------+-------------------+-------+----------+--------+
+7 rows in set (0.00 sec)
+
+------------------------------------------------------------------------JOIN---------------------------------------------------------------------------------------.
+mysql> select book.BNAME, book.PRICE, bk.QUANTITY, bk.RATING from BK LEFT JOIN BOOK ON BK.BKID = BOOK.BID ORDER BY BK.BNAME;
++--------------------+-------+----------+--------+
+| BNAME              | PRICE | QUANTITY | RATING |
++--------------------+-------+----------+--------+
+| Gone Girl          |   295 |       12 |      4 |
+| Harry Potter       |   300 |        9 |      5 |
+| India After Gandhi |   599 |       11 |      4 |
+| My Gita            |   231 |        7 |      5 |
+| The Alchemist      |   250 |        5 |      4 |
+| Tresure Island     |   149 |       12 |      5 |
+| Wings of Fire      |   316 |       10 |      5 |
++--------------------+-------+----------+--------+
+7 rows in set (0.13 sec)
+
+mysql> select book.BNAME, book.AUTHOR, book.PUB, BK.QUANTITY From book RIGHT JOIN BK ON BOOK.BID = BK.BKID ORDER BY bK.QUANTITY;
++--------------------+-------------------+------------+----------+
+| BNAME              | AUTHOR            | PUB        | QUANTITY |
++--------------------+-------------------+------------+----------+
+| The Alchemist      | paul Coelho       | 2005-10-17 |        5 |
+| My Gita            | Devdutt Pattanaik | 2015-11-11 |        7 |
+| Harry Potter       | J.K Rowling       | 2014-09-01 |        9 |
+| Wings of Fire      | A.P.J Abdul kalam | 1991-01-01 |       10 |
+| India After Gandhi | Ramachandra Guha  | 0217-07-19 |       11 |
+| Gone Girl          | Gillian Flynn     | 0212-11-08 |       12 |
+| Tresure Island     | Robert Louis      | 2013-01-01 |       12 |
++--------------------+-------------------+------------+----------+
+7 rows in set (0.00 sec)
+
+------------------------------------------------------------------------NESTED QUERY-------------------------------------------------------------------------------.
+mysql> select * from book where bname in(select BNAME from book where price > 200);
++-----+--------------------+-------------------+-------+------------+
+| BID | BNAME              | AUTHOR            | PRICE | PUB        |
++-----+--------------------+-------------------+-------+------------+
+|   1 | The Alchemist      | paul Coelho       |   250 | 2005-10-17 |
+|   2 | Harry Potter       | J.K Rowling       |   300 | 2014-09-01 |
+|   3 | Wings of Fire      | A.P.J Abdul kalam |   316 | 1991-01-01 |
+|   4 | My Gita            | Devdutt Pattanaik |   231 | 2015-11-11 |
+|   5 | India After Gandhi | Ramachandra Guha  |   599 | 0217-07-19 |
+|   6 | Gone Girl          | Gillian Flynn     |   295 | 0212-11-08 |
++-----+--------------------+-------------------+-------+------------+
+6 rows in set (0.04 sec)
+
+mysql> select * from book where bname in(select BNAME from book where price > 200);
++-----+--------------------+-------------------+-------+------------+
+| BID | BNAME              | AUTHOR            | PRICE | PUB        |
++-----+--------------------+-------------------+-------+------------+
+|   1 | The Alchemist      | paul Coelho       |   250 | 2005-10-17 |
+|   2 | Harry Potter       | J.K Rowling       |   300 | 2014-09-01 |
+|   3 | Wings of Fire      | A.P.J Abdul kalam |   316 | 1991-01-01 |
+|   4 | My Gita            | Devdutt Pattanaik |   231 | 2015-11-11 |
+|   5 | India After Gandhi | Ramachandra Guha  |   599 | 0217-07-19 |
+|   6 | Gone Girl          | Gillian Flynn     |   295 | 0212-11-08 |
++-----+--------------------+-------------------+-------+------------+
+6 rows in set (0.04 sec)
+
+mysql> create table new_book(BID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,BNAME VARCHAR(40),AUTHOR VARCHAR(40),PRICE INT,PUB DATE);
+Query OK, 0 rows affected (1.06 sec)
+
+mysql> insert into new_book select * from book where BID in(select BID from book book);
+Query OK, 7 rows affected (0.22 sec)
+Records: 7  Duplicates: 0  Warnings: 0
+
+mysql> select * from new_book;
++-----+--------------------+-------------------+-------+------------+
+| BID | BNAME              | AUTHOR            | PRICE | PUB        |
++-----+--------------------+-------------------+-------+------------+
+|   1 | The Alchemist      | paul Coelho       |   250 | 2005-10-17 |
+|   2 | Harry Potter       | J.K Rowling       |   300 | 2014-09-01 |
+|   3 | Wings of Fire      | A.P.J Abdul kalam |   316 | 1991-01-01 |
+|   4 | My Gita            | Devdutt Pattanaik |   231 | 2015-11-11 |
+|   5 | India After Gandhi | Ramachandra Guha  |   599 | 0217-07-19 |
+|   6 | Gone Girl          | Gillian Flynn     |   295 | 0212-11-08 |
+|   7 | Tresure Island     | Robert Louis      |   149 | 2013-01-01 |
++-----+--------------------+-------------------+-------+------------+
+7 rows in set (0.00 sec)
+
+mysql> DELETE FROM BOOK WHERE PRICE IN(SELECT PRICE FROM NEW_BOOK WHERE PRICE > 300);
+Query OK, 2 rows affected (0.18 sec)
+
+mysql> SELECT * FROM BOOK;
++-----+----------------+-------------------+-------+------------+
+| BID | BNAME          | AUTHOR            | PRICE | PUB        |
++-----+----------------+-------------------+-------+------------+
+|   1 | The Alchemist  | paul Coelho       |   250 | 2005-10-17 |
+|   2 | Harry Potter   | J.K Rowling       |   300 | 2014-09-01 |
+|   4 | My Gita        | Devdutt Pattanaik |   231 | 2015-11-11 |
+|   6 | Gone Girl      | Gillian Flynn     |   295 | 0212-11-08 |
+|   7 | Tresure Island | Robert Louis      |   149 | 2013-01-01 |
++-----+----------------+-------------------+-------+------------+
+5 rows in set (0.00 sec)
+
+mysql> UPDATE  NEW_BOOK SET PRICE = PRICE*0.25 WHERE PRICE IN (SELECT PRICE FROM BOOK WHERE PRICE <= 500);
+Query OK, 5 rows affected (0.10 sec)
+Rows matched: 5  Changed: 5  Warnings: 0
+
+mysql> SELECT * FROM NEW_BOOK;
++-----+--------------------+-------------------+-------+------------+
+| BID | BNAME              | AUTHOR            | PRICE | PUB        |
++-----+--------------------+-------------------+-------+------------+
+|   1 | The Alchemist      | paul Coelho       |    63 | 2005-10-17 |
+|   2 | Harry Potter       | J.K Rowling       |    75 | 2014-09-01 |
+|   3 | Wings of Fire      | A.P.J Abdul kalam |   316 | 1991-01-01 |
+|   4 | My Gita            | Devdutt Pattanaik |    58 | 2015-11-11 |
+|   5 | India After Gandhi | Ramachandra Guha  |   599 | 0217-07-19 |
+|   6 | Gone Girl          | Gillian Flynn     |    74 | 0212-11-08 |
+|   7 | Tresure Island     | Robert Louis      |    37 | 2013-01-01 |
++-----+--------------------+-------------------+-------+------------+
+7 rows in set (0.00 sec)
+
+
